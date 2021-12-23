@@ -17,8 +17,13 @@ public class TeamTest extends TestCase {
         assertEquals(" 'Vikas' ", team.getPlayers()[0].toString());
     }
 
-    public void testToString() {
-        assertEquals("players=[ 'Vikas' ], points=0, serveCount=0", team.toString());
+    public void testToStringServeCount0() {
+        assertEquals("players=[ 'Vikas' ], points=0", team.toString());
+    }
+
+    public void testToStringServeCountNon0() {
+        team.incrementServeCount();
+        assertEquals("players=[ 'Vikas' ], points=0, serveCount=1", team.toString());
     }
 
     public void testPoints() {

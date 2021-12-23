@@ -28,7 +28,29 @@ public class TableTennisTest extends TestCase {
     }
 
     @Test
+    public void testPlayWithFirstToReach11_team2() {
+        team1.setPoints(1);
+        team2.setPoints(11);
+
+        TableTennis tableTennis = new TableTennis(team1, team2);
+        Team winner = tableTennis.play();
+
+        Assert.assertEquals(team2.getPlayers()[0], winner.getPlayers()[0]);
+    }
+
+    @Test
     public void testPlayWithFirstToReach21() {
+        team1.setPoints(21);
+        team2.setPoints(11);
+
+        TableTennis tableTennis = new TableTennis(team1, team2);
+        Team winner = tableTennis.play();
+
+        Assert.assertEquals(team1.getPlayers()[0], winner.getPlayers()[0]);
+    }
+
+    @Test
+    public void testPlayWithFirstToReach21_team2() {
         team1.setPoints(11);
         team2.setPoints(21);
 
@@ -47,6 +69,28 @@ public class TableTennisTest extends TestCase {
         Team winner = tableTennis.play();
 
         Assert.assertEquals(team1.getPlayers()[0], winner.getPlayers()[0]);
+    }
+
+    @Test
+    public void testPlayWithTwoPointsLead_team2() {
+        team1.setPoints(10);
+        team2.setPoints(12);
+
+        TableTennis tableTennis = new TableTennis(team1, team2);
+        Team winner = tableTennis.play();
+
+        Assert.assertEquals(team2.getPlayers()[0], winner.getPlayers()[0]);
+    }
+
+    @Test
+    public void testPlayWithTwoPointsLead_equal() {
+        team1.setPoints(10);
+        team2.setPoints(10);
+
+        TableTennis tableTennis = new TableTennis(team1, team2);
+        Team winner = tableTennis.play();
+
+        assertTrue(winner.getPoints() >= 11);
     }
 
     @Test

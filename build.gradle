@@ -28,8 +28,10 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
+            element = 'CLASS'
+            includes = ['com.deserve.tabletennis.*']
             limit {
-                minimum = 0.85
+                minimum = 0.9
             }
         }
     }
