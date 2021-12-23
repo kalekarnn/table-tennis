@@ -1,0 +1,6 @@
+# Ignore hidden folders
+.git
+.gradle
+
+.idea
+build/

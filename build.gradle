@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group 'org.com.deserve'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+    dependsOn test
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.85
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.deserve.Solution'
+        )
+    }
+}
