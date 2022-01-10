@@ -20,27 +20,33 @@ public class TableTennis {
 
     public Team play() {
 
-        while (!isFinished()) {
-
+        int team = 2;
+        do {
             int serveResult = getServeResult();
 
-            updatePoints(serveResult);
+            team = updatePoints(serveResult);
 
             System.out.println("serveResult : " + serveResult);
             displayScore();
-        }
+        } while (!isFinished(team));
 
         return getWinner();
     }
 
-    public boolean isFinished() {
+    public boolean isFinished(int team) {
 
         if (isFirstToReachEleven()) {
             return true;
         } else if (isFirstToReachTwentyOne()) {
             return true;
+        } else if (isFifteenWithTwoConsecutivePoints(team)) {
+            return true;
         } else
             return isTwoPointsLead();
+    }
+
+    private boolean isFifteenWithTwoConsecutivePoints(int team) {
+        return teams[0].getPoints() >= 15 && teams[1].getPoints() >= 15 && (team == 0 || team == 1);
     }
 
     public Team getWinner() {
@@ -86,13 +92,29 @@ public class TableTennis {
         return serveResult;
     }
 
-    private void updatePoints(int serveResult) {
+    private int updatePoints(int serveResult) {
         if (serveResult % 2 == 0) {
             int currentPoints = teams[0].getPoints();
             teams[0].setPoints(currentPoints + 1);
+
+            if (teams[0].isLastPointWinner()) {
+                return 0;
+            }
+
+            teams[0].setLastPointWinner(true);
+            teams[1].setLastPointWinner(false);
+
         } else {
             int currentPoints = teams[1].getPoints();
             teams[1].setPoints(currentPoints + 1);
+
+            if (teams[1].isLastPointWinner()) {
+                return 1;
+            }
+            teams[1].setLastPointWinner(true);
+            teams[0].setLastPointWinner(false);
         }
+
+        return 2;
     }
 }

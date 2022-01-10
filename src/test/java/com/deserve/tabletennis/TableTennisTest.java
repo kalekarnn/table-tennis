@@ -101,4 +101,18 @@ public class TableTennisTest extends TestCase {
 
         assertTrue(winner.getPoints() >= 11);
     }
+
+    @Test
+    public void testPlayWith15_15_two_consecutive_points() {
+        team1.setPoints(16);
+        team2.setPoints(15);
+
+        team2.setLastPointWinner(true);
+        team2.setPoints(16);
+
+        TableTennis tableTennis = new TableTennis(team1, team2);
+        Team winner = tableTennis.play();
+
+        Assert.assertEquals(team2.getPlayers()[0], winner.getPlayers()[0]);
+    }
 }

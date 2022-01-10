@@ -7,6 +7,7 @@ public class Team {
     private final com.deserve.tabletennis.Player[] players;
     private int points;
     private int serveCount;
+    private boolean lastPointWinner;
 
     public com.deserve.tabletennis.Player[] getPlayers() {
         return players;
@@ -38,6 +39,14 @@ public class Team {
 
     public boolean isMaxServeReached() {
         return this.serveCount == 2;
+    }
+
+    public boolean isLastPointWinner() {
+        return lastPointWinner;
+    }
+
+    public void setLastPointWinner(boolean lastPointWinner) {
+        this.lastPointWinner = lastPointWinner;
     }
 
     public int serve() {
